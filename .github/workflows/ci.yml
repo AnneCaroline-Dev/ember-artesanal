@@ -14,7 +14,7 @@ jobs:
     name: Lint, tipos, testes e build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0 # o SonarCloud precisa do histórico para achar o "código novo"
       - uses: actions/setup-node@v4
@@ -43,7 +43,7 @@ jobs:
     name: Testes E2E (celular)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: 22
