@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+/* Cores e fontes do design system do Figma (página "Design System"). */
+@theme inline {
+  --font-display: var(--font-playfair);
+  --font-sans: var(--font-inter);
+
+  --color-primario: #d46d25;
+  --color-primario-escuro: #964400;
+  --color-salvia: #a4b885;
+  --color-oliva: #526439;
+  --color-marrom: #564338;
+  --color-fundo: #faf8f5;
+  --color-erro: #ba1a1a;
+  --color-aviso: #fff6a1;
+}
+
+body {
+  background: var(--color-fundo);
+  color: #1c1917;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
