@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { LogoVela } from "@/app/_componentes/logo-vela";
 
 // Moldura das telas de acesso do produtor, com as cores do alta fidelidade.
 export function MolduraDeAcesso({
@@ -15,11 +16,8 @@ export function MolduraDeAcesso({
   return (
     <main className="flex flex-1 flex-col items-center bg-gradient-to-b from-[#fbeee4] to-fundo px-5 py-12">
       <div className="flex w-full max-w-sm flex-col items-center gap-3 text-center">
-        <span
-          aria-hidden
-          className="flex size-14 items-center justify-center rounded-full bg-white text-2xl text-primario-escuro shadow-sm"
-        >
-          ✦
+        <span className="flex size-16 items-center justify-center rounded-full border border-[#eae8e5] bg-white shadow-sm">
+          <LogoVela className="w-8" />
         </span>
         <p className="text-sm font-medium tracking-wide text-primario-escuro">Ember Artesanal</p>
         <h1 className="font-display text-2xl font-medium text-stone-900">{titulo}</h1>

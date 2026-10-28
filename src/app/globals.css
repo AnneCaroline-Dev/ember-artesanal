@@ -22,3 +22,30 @@ body {
   color: #1c1917;
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }
+
+/* Splash screen: a barra enche e a tela some sozinha (ver src/app/_componentes/splash.tsx). */
+@theme {
+  --animate-splash: splash-some 1.8s ease-in forwards;
+  --animate-splash-barra: splash-barra 1.3s ease-out forwards;
+
+  @keyframes splash-some {
+    0%,
+    75% {
+      opacity: 1;
+      visibility: visible;
+    }
+    100% {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  @keyframes splash-barra {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+}
