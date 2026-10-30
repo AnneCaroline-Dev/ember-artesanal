@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import { EncaminharConvite } from "./_componentes/encaminhar-convite";
 import { Splash } from "./_componentes/splash";
 import "./globals.css";
 
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="pt-BR" className={`${playfair.variable} ${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <Splash />
+        <EncaminharConvite />
         {children}
       </body>
     </html>

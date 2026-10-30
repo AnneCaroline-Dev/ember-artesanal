@@ -23,3 +23,20 @@ test.describe("P1 · Entrar com segurança", () => {
     );
   });
 });
+
+test.describe("P1 · Entrar com segurança · e-mail padrão da Supabase", () => {
+  test("CA1 · o convite que chega na página inicial vai para a área do produtor", async ({
+    page,
+  }) => {
+    await page.goto("/#access_token=falso&refresh_token=falso&type=invite");
+    await expect(page).toHaveURL(/\/produtor\/entrar\?erro=link$/);
+    await expect(page.getByRole("main").getByRole("alert")).toHaveText(
+      "Este link expirou ou já foi usado. Peça um novo convite.",
+    );
+  });
+
+  test("CA1 · um convite vencido avisa na tela Entrar", async ({ page }) => {
+    await page.goto("/#error=access_denied&error_code=otp_expired");
+    await expect(page).toHaveURL(/\/produtor\/entrar\?erro=link$/);
+  });
+});
