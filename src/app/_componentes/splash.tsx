@@ -1,43 +1,35 @@
-import { LogoVela } from "./logo-vela";
-
-// Splash screen do Figma (nó 10:868). Só CSS: aparece ao abrir o app e some sozinha,
+// Splash screen: a tela começa escura com a vela apagada, a chama acende devagar,
+// a tela clareia e a chama fica se mexendo até a splash sumir. Só CSS (globals.css),
 // sem atrasar o carregamento. Quem pediu menos movimento no aparelho não vê.
+// O desenho é o símbolo da vela do Figma (public/logo-vela.svg), com a chama separada do resto.
 export function Splash() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-50 flex animate-splash flex-col items-center justify-center overflow-hidden bg-[#fbf9f6] px-8 motion-reduce:hidden"
+      className="splash-fundo pointer-events-none fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 motion-reduce:hidden"
     >
-      <span className="absolute -top-24 -left-24 size-80 rounded-full bg-primario-escuro/[0.03] blur-3xl" />
-      <span className="absolute -right-24 -bottom-24 size-96 rounded-full bg-[#fdc086]/5 blur-3xl" />
-
-      <div className="relative flex flex-col items-center text-center">
-        <span className="relative flex size-24 items-center justify-center rounded-full border border-[#eae8e5] bg-white shadow-[0_8px_24px_rgba(150,68,0,0.08)]">
-          <span className="absolute inset-0 rounded-full bg-primario-escuro/10 blur-md" />
-          <LogoVela className="relative" />
-        </span>
-
-        <p className="mt-8 font-display text-[26px] font-bold tracking-[-0.65px] text-[#1b1c1a]">
-          Ember Artesanal
-        </p>
-
-        <div className="mt-3 flex items-center gap-3">
-          <span className="h-px w-8 bg-[#dcc1b3]/50" />
-          <p className="text-base text-marrom/80 italic">Desde 2024</p>
-          <span className="h-px w-8 bg-[#dcc1b3]/50" />
-        </div>
-
-        <p className="mt-8 max-w-64 text-lg leading-[29.25px] font-light tracking-[0.45px] text-marrom">
-          Iluminando seus momentos com essência artesanal
-        </p>
-      </div>
-
-      <div className="absolute bottom-16 flex flex-col items-center gap-3">
-        <div className="h-0.5 w-48 overflow-hidden rounded-full bg-[#eae8e5]">
-          <div className="h-full animate-splash-barra bg-primario-escuro" />
-        </div>
-        <p className="text-xs tracking-[2.4px] text-[#707070] uppercase">Preparando o ateliê</p>
-      </div>
+      <svg width="80" height="84" viewBox="0 0 40 42" fill="none" className="overflow-visible">
+        <circle cx="18" cy="9" r="10" className="splash-brilho" fill="url(#splash-luz)" />
+        <defs>
+          <radialGradient id="splash-luz">
+            <stop offset="0%" stopColor="#fdc086" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#fdc086" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <path
+          data-parte="vela"
+          className="splash-vela"
+          d="M34.5 32C34.9333 32 35.2917 31.8583 35.575 31.575C35.8583 31.2917 36 30.9333 36 30.5C36 30.0667 35.8583 29.7083 35.575 29.425C35.2917 29.1417 34.9333 29 34.5 29C34.0667 29 33.7083 29.1417 33.425 29.425C33.1417 29.7083 33 30.0667 33 30.5C33 30.9333 33.1417 31.2917 33.425 31.575C33.7083 31.8583 34.0667 32 34.5 32ZM30 42H6C4.33333 42 2.91667 41.4167 1.75 40.25C0.583333 39.0833 0 37.6667 0 36V32H12V20C12 18.9 12.3917 17.9583 13.175 17.175C13.9583 16.3917 14.9 16 16 16H20C21.1 16 22.0417 16.3917 22.825 17.175C23.6083 17.9583 24 18.9 24 20V32H29.2C29.1333 31.7333 29.0833 31.4833 29.05 31.25C29.0167 31.0167 29 30.7667 29 30.5C29 28.9667 29.5333 27.6667 30.6 26.6C31.6667 25.5333 32.9667 25 34.5 25C36.0333 25 37.3333 25.5333 38.4 26.6C39.4667 27.6667 40 28.9667 40 30.5C40 31.7667 39.625 32.8833 38.875 33.85C38.125 34.8167 37.1667 35.4667 36 35.8V36C36 37.6667 35.4167 39.0833 34.25 40.25C33.0833 41.4167 31.6667 42 30 42Z"
+        />
+        <path
+          data-parte="chama"
+          className="splash-chama"
+          d="M18 14C16.4 14 15.0667 13.4417 14 12.325C12.9333 11.2083 12.4333 9.85 12.5 8.25C12.5667 6.51667 13.175 4.99167 14.325 3.675C15.475 2.35833 16.7 1.13333 18 0C19.3 1.13333 20.525 2.35833 21.675 3.675C22.825 4.99167 23.4333 6.51667 23.5 8.25C23.5667 9.85 23.0667 11.2083 22 12.325C20.9333 13.4417 19.6 14 18 14Z"
+        />
+      </svg>
+      <p className="splash-nome font-display text-[26px] font-bold tracking-[-0.65px]">
+        Ember Artesanal
+      </p>
     </div>
   );
 }

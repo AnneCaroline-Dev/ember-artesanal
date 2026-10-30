@@ -3,13 +3,25 @@ import { describe, expect, it } from "vitest";
 import { Splash } from "./splash";
 
 describe("Splash screen", () => {
-  it("mostra o símbolo da vela, o nome e a frase do ateliê", () => {
+  it("mostra só o símbolo da vela e o nome do ateliê", () => {
     const { container } = render(<Splash />);
-    expect(container.querySelector('img[src="/logo-vela.svg"]')).not.toBeNull();
+    expect(container.querySelector("svg")).not.toBeNull();
     expect(screen.getByText("Ember Artesanal")).toBeInTheDocument();
-    expect(screen.getByText("Desde 2024")).toBeInTheDocument();
-    expect(screen.getByText("Iluminando seus momentos com essência artesanal")).toBeInTheDocument();
-    expect(screen.getByText("Preparando o ateliê")).toBeInTheDocument();
+    expect(container.textContent).toBe("Ember Artesanal");
+  });
+
+  it("separa a chama do resto da vela, para ela acender e se mexer sozinha", () => {
+    const { container } = render(<Splash />);
+    const chama = container.querySelector('[data-parte="chama"]');
+    const vela = container.querySelector('[data-parte="vela"]');
+    expect(chama).not.toBeNull();
+    expect(vela).not.toBeNull();
+    expect(chama?.getAttribute("class")).toContain("splash-chama");
+  });
+
+  it("começa no escuro e clareia enquanto a vela acende", () => {
+    const { container } = render(<Splash />);
+    expect((container.firstElementChild as HTMLElement).className).toContain("splash-fundo");
   });
 
   it("fica fora do leitor de tela e não bloqueia toques enquanto some", () => {
