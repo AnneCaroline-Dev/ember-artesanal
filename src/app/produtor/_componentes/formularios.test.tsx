@@ -107,3 +107,29 @@ describe("P1 · Entrar com segurança · primeiro acesso", () => {
     expect(dados.get("codigo")).toBe("654321");
   });
 });
+
+describe("P1 · Entrar com segurança · ver a senha digitada", () => {
+  it("CA2 · o olhinho mostra e esconde a senha na tela Entrar", async () => {
+    render(<FormularioEntrar acao={vi.fn(async () => null)} />);
+    const senha = screen.getByLabelText("Senha");
+    await userEvent.type(senha, "segredo123");
+    expect(senha).toHaveAttribute("type", "password");
+
+    await userEvent.click(screen.getByRole("button", { name: "Mostrar senha" }));
+    expect(senha).toHaveAttribute("type", "text");
+    expect(senha).toHaveValue("segredo123");
+
+    await userEvent.click(screen.getByRole("button", { name: "Esconder senha" }));
+    expect(senha).toHaveAttribute("type", "password");
+  });
+
+  it("CA1 · cada campo da tela Crie sua senha tem o seu olhinho", async () => {
+    render(<FormularioCriarSenha acao={vi.fn(async () => null)} />);
+    const [primeiro, segundo] = screen.getAllByRole("button", { name: "Mostrar senha" });
+    await userEvent.click(primeiro);
+    expect(screen.getByLabelText("Nova senha")).toHaveAttribute("type", "text");
+    expect(screen.getByLabelText("Repita a senha")).toHaveAttribute("type", "password");
+    await userEvent.click(segundo);
+    expect(screen.getByLabelText("Repita a senha")).toHaveAttribute("type", "text");
+  });
+});
