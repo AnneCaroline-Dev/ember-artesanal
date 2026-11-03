@@ -6,7 +6,8 @@ test.describe("P1 · Entrar com segurança", () => {
     await expect(page).toHaveURL(/\/produtor\/entrar$/);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Acesso à oficina");
     await expect(page.getByLabel("E-mail")).toBeVisible();
-    await expect(page.getByLabel("Senha")).toBeVisible();
+    await expect(page.getByLabel("Senha", { exact: true })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Mostrar senha" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Entrar" })).toBeVisible();
   });
 
