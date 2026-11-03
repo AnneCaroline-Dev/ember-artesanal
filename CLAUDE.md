@@ -16,7 +16,7 @@
 - Mobile first, but every screen must also work on desktop.
 - Every user-facing text comes from the dictionaries in `src/lib/idioma/` (pt and en). The brand "Ember Artesanal" is never translated.
 - Colors come from the theme tokens in `src/app/globals.css` (with G1 they will mirror the Figma `mapped` variables). Never hardcode a hex value in a new component.
-- Prices are always in R$. Store money as integer cents. Show dates in the America/Sao_Paulo time zone with `formatarData`.
+- Prices are always charged in R$ and stored as integer cents. In English, show an approximate US$ value next to the R$ price (fixed simulated rate), e.g. "R$ 65,00 (≈ US$ 12)". Show dates in the America/Sao_Paulo time zone with `formatarData`.
 - Accessibility: WCAG 2.2 AA. Every field has a label, contrast is at least 4.5:1 for text, touch targets are at least 44px, and everything works with the keyboard.
 
 ## Coding practices
