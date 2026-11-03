@@ -1,5 +1,7 @@
 // P1 · Entrar com segurança: decide em que tela o Rafael precisa estar.
 
+import { comIdioma, type Idioma } from "@/lib/idioma/idiomas";
+
 export type EstadoDeAcesso =
   | { logado: false }
   | {
@@ -29,6 +31,7 @@ export function proximoPasso(estado: EstadoDeAcesso): Passo {
   return "ativar-autenticador";
 }
 
-export function rotaDoPasso(passo: Passo): string {
-  return rotas[passo];
+// G2 · CA2: o Rafael continua no idioma em que estava.
+export function rotaDoPasso(passo: Passo, idioma: Idioma): string {
+  return comIdioma(idioma, rotas[passo]);
 }

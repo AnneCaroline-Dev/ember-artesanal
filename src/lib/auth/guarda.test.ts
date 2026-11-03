@@ -18,18 +18,20 @@ beforeEach(() => {
 
 describe("P1 · Entrar com segurança · proteção das telas", () => {
   it("RF01 · sem a segunda confirmação, o Início manda para a tela do código", async () => {
-    await expect(garantirPasso("inicio")).rejects.toEqual(
-      new Redirecionou("/produtor/entrar/codigo"),
+    await expect(garantirPasso("inicio", "pt")).rejects.toEqual(
+      new Redirecionou("/pt/produtor/entrar/codigo"),
     );
   });
 
-  it("RF01 · sem sessão, o Início manda para a tela Entrar", async () => {
+  it("RF01 · sem sessão, o Início manda para a tela Entrar no mesmo idioma", async () => {
     supabase = null;
-    await expect(garantirPasso("inicio")).rejects.toEqual(new Redirecionou("/produtor/entrar"));
+    await expect(garantirPasso("inicio", "en")).rejects.toEqual(
+      new Redirecionou("/en/produtor/entrar"),
+    );
   });
 
   it("quem está no passo certo continua na tela e recebe o cliente", async () => {
     supabase = criarSupabaseFalso({ nivelAtual: "aal2" });
-    await expect(garantirPasso("inicio")).resolves.toBe(supabase);
+    await expect(garantirPasso("inicio", "pt")).resolves.toBe(supabase);
   });
 });

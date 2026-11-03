@@ -1,3 +1,4 @@
+import type { Idioma } from "@/lib/idioma/idiomas";
 import { rotaDoPasso } from "./proximo-passo";
 
 // O e-mail padrão da Supabase devolve o convite no fim do endereço (depois do #),
@@ -12,7 +13,9 @@ export type DefinirSessao = (tokens: {
   refresh_token: string;
 }) => Promise<{ error: unknown }>;
 
-export const ROTA_LINK_INVALIDO = `${rotaDoPasso("entrar")}?erro=link`;
+export function rotaLinkInvalido(idioma: Idioma) {
+  return `${rotaDoPasso("entrar", idioma)}?erro=link`;
+}
 
 export function lerLinkDoEmail(hash: string): LinkDoEmail {
   const dados = new URLSearchParams(hash.replace(/^#/, ""));
@@ -25,11 +28,15 @@ export function lerLinkDoEmail(hash: string): LinkDoEmail {
   return { tipo: "convite", accessToken, refreshToken };
 }
 
-export async function aceitarConvite(link: LinkDoEmail, definirSessao: DefinirSessao) {
-  if (link.tipo !== "convite") return ROTA_LINK_INVALIDO;
+export async function aceitarConvite(
+  link: LinkDoEmail,
+  definirSessao: DefinirSessao,
+  idioma: Idioma,
+) {
+  if (link.tipo !== "convite") return rotaLinkInvalido(idioma);
   const { error } = await definirSessao({
     access_token: link.accessToken,
     refresh_token: link.refreshToken,
   });
-  return error ? ROTA_LINK_INVALIDO : rotaDoPasso("criar-senha");
+  return error ? rotaLinkInvalido(idioma) : rotaDoPasso("criar-senha", idioma);
 }

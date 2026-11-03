@@ -13,8 +13,8 @@ export default defineConfig({
     trace: "on-first-retry",
   },
   projects: [
-    // A Mariana e o Rafael usam o app no celular.
-    { name: "celular", use: { ...devices["Pixel 7"] } },
+    // A Mariana e o Rafael usam o app no celular, em português.
+    { name: "celular", use: { ...devices["Pixel 7"], locale: "pt-BR" } },
   ],
   webServer: {
     command: `npm run start -- --port ${port}`,
