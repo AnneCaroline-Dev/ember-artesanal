@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 
 test("a página inicial abre no celular com o nome do ateliê", async ({ page }) => {
   await page.goto("/");
+  await expect(page).toHaveURL(/\/pt$/);
   await expect(page).toHaveTitle("Ember Artesanal");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Ember Artesanal");
   await expect(page.getByText("Loja em construção")).toBeVisible();

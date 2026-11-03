@@ -39,10 +39,15 @@ describe("P1 · Entrar com segurança", () => {
   });
 
   it("cada passo tem a sua tela dentro da área do produtor", () => {
-    expect(rotaDoPasso("entrar")).toBe("/produtor/entrar");
-    expect(rotaDoPasso("criar-senha")).toBe("/produtor/criar-senha");
-    expect(rotaDoPasso("ativar-autenticador")).toBe("/produtor/ativar-autenticador");
-    expect(rotaDoPasso("codigo")).toBe("/produtor/entrar/codigo");
-    expect(rotaDoPasso("inicio")).toBe("/produtor");
+    expect(rotaDoPasso("entrar", "pt")).toBe("/pt/produtor/entrar");
+    expect(rotaDoPasso("criar-senha", "pt")).toBe("/pt/produtor/criar-senha");
+    expect(rotaDoPasso("ativar-autenticador", "pt")).toBe("/pt/produtor/ativar-autenticador");
+    expect(rotaDoPasso("codigo", "pt")).toBe("/pt/produtor/entrar/codigo");
+    expect(rotaDoPasso("inicio", "pt")).toBe("/pt/produtor");
+  });
+
+  it("G2 · CA2 · cada passo continua no idioma escolhido", () => {
+    expect(rotaDoPasso("codigo", "en")).toBe("/en/produtor/entrar/codigo");
+    expect(rotaDoPasso("inicio", "en")).toBe("/en/produtor");
   });
 });

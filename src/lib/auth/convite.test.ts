@@ -29,22 +29,22 @@ describe("P1 · Entrar com segurança · link do e-mail padrão da Supabase", ()
 
   it("CA1 · com o convite aceito, leva o Rafael para criar a senha", async () => {
     const definirSessao = vi.fn(async () => ({ error: null }));
-    const rota = await aceitarConvite(lerLinkDoEmail(hashDoConvite), definirSessao);
+    const rota = await aceitarConvite(lerLinkDoEmail(hashDoConvite), definirSessao, "pt");
     expect(definirSessao).toHaveBeenCalledWith({
       access_token: "acesso",
       refresh_token: "renova",
     });
-    expect(rota).toBe("/produtor/criar-senha");
+    expect(rota).toBe("/pt/produtor/criar-senha");
   });
 
   it("CA1 · com o convite recusado ou inválido, avisa na tela Entrar", async () => {
     const recusa = vi.fn(async () => ({ error: new Error("expirou") }));
-    expect(await aceitarConvite(lerLinkDoEmail(hashDoConvite), recusa)).toBe(
-      "/produtor/entrar?erro=link",
+    expect(await aceitarConvite(lerLinkDoEmail(hashDoConvite), recusa, "pt")).toBe(
+      "/pt/produtor/entrar?erro=link",
     );
     const nuncaChamada = vi.fn(async () => ({ error: null }));
-    expect(await aceitarConvite({ tipo: "invalido" }, nuncaChamada)).toBe(
-      "/produtor/entrar?erro=link",
+    expect(await aceitarConvite({ tipo: "invalido" }, nuncaChamada, "en")).toBe(
+      "/en/produtor/entrar?erro=link",
     );
     expect(nuncaChamada).not.toHaveBeenCalled();
   });
